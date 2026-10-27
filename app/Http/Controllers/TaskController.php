@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskUpdateRequest;
+use App\Http\Requests\TaskResponsiblesRequest;
 use App\Http\Requests\TaskCreateRequest;
 use App\Services\TaskService;
 use Illuminate\Http\Request;
@@ -32,7 +34,7 @@ class TaskController extends Controller
         return response()->json(['data' => $result], 201);
     }
 
-    public function update(Request $request, int $task_id)
+    public function update(TaskUpdateRequest $request, int $task_id)
     {
         $result = $this->taskService->update($request, $task_id);
         return response()->json(['data' => $result], 200);
@@ -42,5 +44,17 @@ class TaskController extends Controller
     {
         $this->taskService->destroy($task_id);
         return response()->json([], 204);
+    }
+
+    public function addResponsibles(TaskResponsiblesRequest $request, int $task_id)
+    {
+        $result = $this->taskService->addResponsibles($request, $task_id);
+        return response()->json(['data' => $result], 200);
+    }
+
+    public function removeResponsibles(TaskResponsiblesRequest $request, int $task_id)
+    {
+        $result = $this->taskService->removeResponsibles($request, $task_id);
+        return response()->json(['data' => $result], 200);
     }
 }

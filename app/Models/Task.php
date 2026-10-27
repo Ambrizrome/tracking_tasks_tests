@@ -13,6 +13,10 @@ class Task extends Model
 {
     use HasFactory, SoftDeletes;
 
+    const BACKLOG_STATUS    = 'backlog';
+    const IN_PROCESS_STATUS = 'in_process';
+    const COMPLETED_STATUS  = 'completed';
+
     protected $table = 'tasks';
 
     protected $fillable = [
